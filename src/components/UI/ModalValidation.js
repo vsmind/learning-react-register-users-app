@@ -1,33 +1,47 @@
 import Card from "./Card";
 import Button from "./Button";
-
-import classes from './ModalValidation.module.css';
 import Wrapper from "../Helpers/Wrapper";
 
+import classes from './ModalValidation.module.css';
+import ReactDOM from "react-dom";
+
+const Backdrop = (props) => {
+    return (<div className={classes.backdrop} onClick={props.onClick}/>)
+};
+
+const ModalOverlay = (props) => {
+    return (
+        <Card className={classes.modal}>
+            <header className={classes.header}>
+                <h2>{props.modalHeader}</h2>
+            </header>
+            <div className={classes.content}>
+                <p>{props.modalMessage}</p>
+            </div>
+            <footer className={classes.actions}>
+                <Button onClick={props.onClick}>Okay</Button>
+            </footer>
+        </Card>
+    );
+};
+
 const ModalValidation = (props) => {
+    if (!props.showModal) {
+        return null;
+    }
 
     const onCloseHandler = () => {
         props.onShowModal(false);
     }
 
-    if (!props.showModal) {
-        return null;
-    }
-
     return (
         <Wrapper>
-            <div className={classes.backdrop} onClick={onCloseHandler}/>
-            <Card className={classes.modal}>
-                <header className={classes.header}>
-                    <h2>{props.modalHeader}</h2>
-                </header>
-                <div className={classes.content}>
-                    <p>{props.modalMessage}</p>
-                </div>
-                <footer className={classes.actions}>
-                    <Button onClick={onCloseHandler}>Okay</Button>
-                </footer>
-            </Card>
+            {
+                ReactDOM.createPortal(<Backdrop onClick={onCloseHandler}/>, document.getElementById('backdrop-root'))
+            }
+            {
+                ReactDOM.createPortal(<ModalOverlay modalHeader={props.modalHeader} modalMessage={props.modalMessage} onClick={onCloseHandler}/>, document.getElementById('overlay-root'))
+            }
         </Wrapper>
     );
 }
