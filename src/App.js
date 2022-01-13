@@ -2,7 +2,6 @@ import {useState} from "react";
 import AddUser from "./components/Users/AddUser";
 import UsersList from "./components/Users/UsersList";
 import ModalValidation from "./components/UI/ModalValidation";
-import Wrapper from "./components/Helpers/Wrapper";
 
 const USERS_LIST = [
   {
@@ -29,7 +28,7 @@ function App() {
   };
 
   return (
-    <Wrapper>
+    <>
       <ModalValidation
           showModal={showModal}
           modalHeader={modalHeader}
@@ -41,7 +40,7 @@ function App() {
           setModalHeader={setModalHeader}
           setModalMessage={setModalMessage} />
       <UsersList users={users} />
-    </Wrapper>
+    </>
   );
 }
 
