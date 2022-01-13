@@ -1,7 +1,7 @@
 import {useState} from "react";
-import AddUser from "./components/AddUser";
-import UsersList from "./components/UsersList";
-import ModalValidation from "./components/ModalValidation";
+import AddUser from "./components/Users/AddUser";
+import UsersList from "./components/Users/UsersList";
+import ModalValidation from "./components/UI/ModalValidation";
 
 const USERS_LIST = [
   {
@@ -9,10 +9,10 @@ const USERS_LIST = [
     name: "Jim Holden",
     age: 30,
   }
-]
+];
 
 function App() {
-  const [users, setUsers] = useState(USERS_LIST)
+  const [users, setUsers] = useState(USERS_LIST);
   const [modalHeader, setModalHeader] = useState(false);
   const [modalMessage, setModalMessage] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -21,11 +21,11 @@ function App() {
     setUsers((prevState => {
       return [newUser, ...prevState];
     }));
-  }
+  };
 
   const showModalHandler = (show) => {
     setShowModal(show)
-  }
+  };
 
   return (
     <div>
