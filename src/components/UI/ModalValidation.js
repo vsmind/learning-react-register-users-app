@@ -2,6 +2,7 @@ import Card from "./Card";
 import Button from "./Button";
 
 import classes from './ModalValidation.module.css';
+import Wrapper from "../Helpers/Wrapper";
 
 const ModalValidation = (props) => {
 
@@ -14,7 +15,7 @@ const ModalValidation = (props) => {
     }
 
     return (
-        <div>
+        <Wrapper>
             <div className={classes.backdrop} onClick={onCloseHandler}/>
             <Card className={classes.modal}>
                 <header className={classes.header}>
@@ -27,7 +28,7 @@ const ModalValidation = (props) => {
                     <Button onClick={onCloseHandler}>Okay</Button>
                 </footer>
             </Card>
-        </div>
+        </Wrapper>
     );
 }
 
